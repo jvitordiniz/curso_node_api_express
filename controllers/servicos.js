@@ -10,4 +10,9 @@ module.exports = app =>{
         Servico.adiciona(servico)
         res.send('Você está na roda de servicos realizando um POST')
     })
+    app.put('/servicos/:id', (req, res)=>{
+        const id = parseInt(req.params.id)
+        const valores = req.body
+        Servico.altera(id, valores, res)
+    })
 }

@@ -1,4 +1,4 @@
-//responsabilidade: envio dos dados ao BD
+//responsabilidade: envio dos dados ao BD, e definições de regras de negócio
 const conexao = require('../infra/conexao')
 class Servicos{
     adiciona(servico){
@@ -12,6 +12,19 @@ class Servicos{
                 console.log(resultado)
             }
         })
+    }
+
+    altera(id, valores, res){
+        const sql = 'UPDATE SERVICOS SET ? WHERE Id = ?'
+
+        conexao.query(sql, [valores, id], (erro, resultado) =>{
+            if(erro){
+                res.status(400).json(erro)
+            }else{
+                res.status(200).json({...valores, id})
+            }
+        })
+        
     }
 }
 
